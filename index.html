@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -618,9 +619,7 @@
             { q: "Which HTTP status code represents 'Conflict'?", a: ["403", "404", "409", "418"], c: 2, cat: "Web" },
             { q: "What is the Big O complexity of a binary search?", a: ["O(n)", "O(log n)", "O(n^2)", "O(1)"], c: 1, cat: "Algorithms" },
             { q: "Which company created the Go programming language?", a: ["Google", "Meta", "JetBrains", "Oracle"], c: 0, cat: "Programming" },
-            { q: "What does 'SOLID' principles stand for in Software Engineering?", a: ["Design Patterns", "Database Normalization", "Code Architecture", "Deployment Pipeline"], c: 2, cat: "Design" },
-            { q: "Which cloud service model does AWS EC2 follow?", a: ["SaaS", "PaaS", "IaaS", "Serverless"], c: 2, cat: "Cloud" },
-            { q: "What is a 'Ghost' in Git terminology?", a: ["Lost commit", "Deleted branch", "Unstaged change", "Detached HEAD"], c: 3, cat: "Version Control" },{ q: "Which OOP concept allows one interface to be used for a general class of actions?", a: ["Encapsulation", "Polymorphism", "Inheritance", "Compilation"], c: 1, cat: "OOP Concepts" },
+            { q: "Which OOP concept allows one interface to be used for a general class of actions?", a: ["Encapsulation", "Polymorphism", "Inheritance", "Compilation"], c: 1, cat: "OOP Concepts" },
 
 { q: "Which of the following supports runtime polymorphism in C++?", a: ["Function overloading", "Operator overloading", "Virtual functions", "Inline functions"], c: 2, cat: "Polymorphism" },
 
@@ -679,7 +678,10 @@
 { q: "Which principle promotes depending on abstractions rather than concrete classes?", a: ["Dependency Inversion", "Single Responsibility", "Encapsulation", "Overloading"], c: 0, cat: "SOLID Principles" },
 
 { q: "Which keyword is used to implement an interface in Java?", a: ["extends", "implements", "inherits", "interface"], c: 1, cat: "Java OOP" },
-{ q: "In JavaScript, what is the 'Temporal Dead Zone'?", a: ["Memory leak", "Scope restriction", "Sync error", "Network delay"], c: 1, cat: "Advanced JS" }
+            { q: "What does 'SOLID' principles stand for in Software Engineering?", a: ["Design Patterns", "Database Normalization", "Code Architecture", "Deployment Pipeline"], c: 2, cat: "Design" },
+            { q: "Which cloud service model does AWS EC2 follow?", a: ["SaaS", "PaaS", "IaaS", "Serverless"], c: 2, cat: "Cloud" },
+            { q: "What is a 'Ghost' in Git terminology?", a: ["Lost commit", "Deleted branch", "Unstaged change", "Detached HEAD"], c: 3, cat: "Version Control" },
+            { q: "In JavaScript, what is the 'Temporal Dead Zone'?", a: ["Memory leak", "Scope restriction", "Sync error", "Network delay"], c: 1, cat: "Advanced JS" }
         ];
 
         /* ================= APP STATE ================= */
@@ -736,7 +738,7 @@
             else AppState.maxTimer = 20;
 
             const shuffled = [...DATA_VAULT].sort(() => 0.5 - Math.random());
-            AppState.activeQuestions = shuffled.slice(0, 10);
+            AppState.activeQuestions = shuffled.slice(0, 10);///////
 
             AppState.currentIndex = 0;
             AppState.score = 0;
