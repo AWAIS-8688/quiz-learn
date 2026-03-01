@@ -706,6 +706,26 @@
             lucide.createIcons();
             document.getElementById('next-action').addEventListener('click', proceedSequence);
             document.getElementById('audio-toggle').onclick = toggleAudio;
+             document.getElementById('username-input')
+        .addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                startSequence();
+            }
+        });
+         document.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+
+            const quizScreenActive =
+                document.getElementById('quiz-screen').classList.contains('active');
+
+            const nextBtnVisible =
+                document.getElementById('next-action').style.visibility === 'visible';
+
+            if (quizScreenActive && nextBtnVisible) {
+                proceedSequence();
+            }
+        }
+    });
             loadUserData();
             renderRanks();
         }
@@ -738,7 +758,7 @@
             else AppState.maxTimer = 20;
 
             const shuffled = [...DATA_VAULT].sort(() => 0.5 - Math.random());
-            AppState.activeQuestions = shuffled.slice(0, 10);///////
+            AppState.activeQuestions = shuffled.slice(0, 20);///////
 
             AppState.currentIndex = 0;
             AppState.score = 0;
@@ -869,8 +889,8 @@
             document.getElementById('res-streak').textContent = AppState.maxStreak;
             document.getElementById('res-time').textContent = avgTime + "s";
 
-            document.getElementById('result-status').textContent = accuracy >= 70 ? "DEPLOYMENT SUCCESSFUL" : "MISSION FAILED - RETRY REQUIRED";
-            document.getElementById('result-status').style.color = accuracy >= 70 ? "var(--success)" : "var(--accent)";
+            document.getElementById('result-status').textContent = accuracy >= 50 ? "DEPLOYMENT SUCCESSFUL" : "MISSION FAILED - RETRY REQUIRED";
+            document.getElementById('result-status').style.color = accuracy >= 50 ? "var(--success)" : "var(--accent)";
 
             saveResult(accuracy);
             renderFinalChart();
