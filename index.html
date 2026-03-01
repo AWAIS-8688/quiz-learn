@@ -603,7 +603,7 @@
                         </div>
                     </div>
                     <div style="margin-top: 3rem; text-align: center; color: var(--text-dim); font-size: 0.8rem;">
-                        BUILD VERSION: 4.2.0-STABLE | KERNEL: ZENITH-X
+                        BUILD VERSION: 4.2.0-STABLE | KERNEL: SHAH-X
                     </div>
                 </div>
             </section>
@@ -939,7 +939,7 @@
 
         /* ================= STORAGE & RANKS ================= */
         function saveResult(acc) {
-            let ranks = JSON.parse(localStorage.getItem('zenith_ranks') || '[]');
+            let ranks = JSON.parse(localStorage.getItem('Shah_ranks') || '[]');
             ranks.push({
                 name: AppState.userName,
                 xp: AppState.score,
@@ -947,12 +947,12 @@
                 date: new Date().toLocaleDateString()
             });
             ranks.sort((a, b) => b.xp - a.xp);
-            localStorage.setItem('zenith_ranks', JSON.stringify(ranks.slice(0, 15)));
+            localStorage.setItem('Shah_ranks', JSON.stringify(ranks.slice(0, 15)));
             renderRanks();
         }
 
         function renderRanks() {
-            const ranks = JSON.parse(localStorage.getItem('zenith_ranks') || '[]');
+            const ranks = JSON.parse(localStorage.getItem('Shah_ranks') || '[]');
             const container = document.getElementById('ranks-list');
 
             if (ranks.length === 0) {
@@ -984,22 +984,22 @@
             document.getElementById('user-level').textContent = `LVL ${AppState.userLevel}`;
             document.getElementById('level-progress').style.width = `${progress}%`;
 
-            localStorage.setItem('zenith_user_data', JSON.stringify({
+            localStorage.setItem('Shah_user_data', JSON.stringify({
                 xp: AppState.userXP,
                 level: AppState.userLevel
             }));
         }
 
         function loadUserData() {
-            const data = JSON.parse(localStorage.getItem('zenith_user_data') || '{"xp":0, "level":1}');
+            const data = JSON.parse(localStorage.getItem('Shah_user_data') || '{"xp":0, "level":1}');
             AppState.userXP = data.xp;
             AppState.userLevel = data.level;
             updateLevel();
         }
 
         function shareResults() {
-            const text = `I just completed a Zenith Mission with ${AppState.score} XP and ${AppState.maxStreak} combo! Can you beat me?`;
-            navigator.clipboard.writeText(text);
+            const text = `I just completed a Shah Mission with ${AppState.score} XP and ${AppState.maxStreak} combo! Can you beat me?`;
+            navigator. clipboard.writeText(text);
             alert("Mission stats copied to clipboard, Commander.");
         }
 
