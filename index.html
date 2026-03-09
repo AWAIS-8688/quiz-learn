@@ -362,6 +362,30 @@
                 box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
             }
         }
+        /* ================= ADD MCQ FORM ================= */
+
+.mcq-form{
+display:flex;
+flex-direction:column;
+gap:15px;
+max-width:600px;
+}
+
+.mcq-form input,
+.mcq-form select{
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.1);
+padding:14px;
+border-radius:12px;
+color:white;
+outline:none;
+}
+
+.mcq-form input:focus,
+.mcq-form select:focus{
+border-color:var(--primary);
+box-shadow:0 0 10px rgba(139,92,246,0.3);
+}
 
         /* Responsive */
         @media (max-width: 1100px) {
@@ -404,6 +428,9 @@
                 <a href="#" class="nav-item" onclick="showScreen('intel-screen')">
                     <i data-lucide="database"></i> Intel Cache
                 </a>
+                <a href="#" class="nav-item" onclick="showScreen('addmcq-screen')">
+    <i data-lucide="plus-circle"></i> Add MCQ
+</a>
             </nav>
 
             <div style="margin-top: auto;">
@@ -607,6 +634,45 @@
                     </div>
                 </div>
             </section>
+            </section>
+
+
+<!-- Add MCQ Screen -->
+<section id="addmcq-screen" class="screen">
+
+<div class="glass-card">
+
+<h1 style="font-family:'Orbitron'; margin-bottom:2rem;">
+ADD NEW MCQ
+</h1>
+
+<div class="mcq-form">
+
+<input id="mcq-question" placeholder="Question">
+
+<input id="mcq-a" placeholder="Option A">
+
+<input id="mcq-b" placeholder="Option B">
+
+<input id="mcq-c" placeholder="Option C">
+
+<input id="mcq-d" placeholder="Option D">
+
+<input id="mcq-cat" placeholder="Category">
+
+<select id="mcq-correct">
+<option value="0">Correct A</option>
+<option value="1">Correct B</option>
+<option value="2">Correct C</option>
+<option value="3">Correct D</option>
+</select>
+
+<button class="btn" onclick="addMCQ()">ADD MCQ</button>
+
+</div>
+
+</div>
+</section>
         </main>
     </div>
 
@@ -999,10 +1065,34 @@
 
         function shareResults() {
             const text = `I just completed a Shah Mission with ${AppState.score} XP and ${AppState.maxStreak} combo! Can you beat me?`;
-            navigator. clipboard.writeText(text);
+            navigator.clipboard.writeText(text);
             alert("Mission stats copied to clipboard, Commander.");
         }
+        function addMCQ(){
 
+const q=document.getElementById("mcq-question").value;
+const a=document.getElementById("mcq-a").value;
+const b=document.getElementById("mcq-b").value;
+const c=document.getElementById("mcq-c").value;
+const d=document.getElementById("mcq-d").value;
+const cat=document.getElementById("mcq-cat").value;
+const correct=parseInt(document.getElementById("mcq-correct").value);
+
+if(!q||!a||!b||!c||!d){
+alert("Fill all fields");
+return;
+}
+
+DATA_VAULT.push({
+q:q,
+a:[a,b,c,d],
+c:correct,
+cat:cat || "General"
+});
+
+alert("MCQ Added Successfully!");
+
+}
         window.onload = init;
     </script>
 </body>
