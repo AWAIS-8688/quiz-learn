@@ -430,6 +430,8 @@ box-shadow:0 0 10px rgba(139,92,246,0.3);
                 </a>
                 <a href="#" class="nav-item" onclick="showScreen('addmcq-screen')">
     <i data-lucide="plus-circle"></i> Add MCQ
+    <input type="file" id="importFile">
+    <button class="btn" onclick="exportMCQ()">EXPORT MCQs</button>
 </a>
             </nav>
 
@@ -768,8 +770,18 @@ ADD NEW MCQ
         };
 
         /* ================= CORE INITIALIZATION ================= */
+        function loadMCQs(){
+
+let saved = JSON.parse(localStorage.getItem("SHAH_MCQ_DB") || "[]");
+
+if(saved.length>0){
+DATA_VAULT.push(...saved);
+}
+
+}
         function init() {
             lucide.createIcons();
+            loadMCQs();
             document.getElementById('next-action').addEventListener('click', proceedSequence);
             document.getElementById('audio-toggle').onclick = toggleAudio;
              document.getElementById('username-input')
@@ -1083,14 +1095,68 @@ alert("Fill all fields");
 return;
 }
 
-DATA_VAULT.push({
+const newMCQ={
 q:q,
 a:[a,b,c,d],
 c:correct,
 cat:cat || "General"
-});
+};
+
+DATA_VAULT.push(newMCQ);
+
+/* SAVE TO LOCAL STORAGE */
+
+let saved = JSON.parse(localStorage.getItem("SHAH_MCQ_DB") || "[]");
+
+saved.push(newMCQ);
+
+localStorage.setItem("SHAH_MCQ_DB",JSON.stringify(saved));
 
 alert("MCQ Added Successfully!");
+
+}
+function exportMCQ(){
+
+const data = JSON.stringify(DATA_VAULT,null,2);
+
+const blob = new Blob([data],{type:"application/json"});
+
+const url = URL.createObjectURL(blob);
+
+const a=document.createElement("a");
+a.href=url;
+a.download="quiz_mcqs.json";
+a.click();
+
+URL.revokeObjectURL(url);
+
+}
+function importMCQ(){
+
+const file=document.getElementById("importFile").files[0];
+
+if(!file){
+alert("Select a file");
+return;
+}
+
+const reader=new FileReader();
+
+reader.onload=function(e){
+
+const data=JSON.parse(e.target.result);
+
+data.forEach(mcq=>{
+DATA_VAULT.push(mcq);
+});
+
+localStorage.setItem("SHAH_MCQ_DB",JSON.stringify(DATA_VAULT));
+
+alert("MCQs Imported Successfully");
+
+};
+
+reader.readAsText(file);
 
 }
         window.onload = init;
